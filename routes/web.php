@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+//ANIO_ESCOLAR
+Route::get('/anio-escolar', 'AlumnoController@index');
