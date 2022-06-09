@@ -26,4 +26,11 @@ class Periodo extends Model
      * @var array
      */
     protected $fillable = ['ID_GRADO', 'FECHA_PERIODO_INICIO','FECHA_PERIODO_FIN', 'NOMBRE_PERIODO'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

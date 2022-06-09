@@ -26,4 +26,11 @@ class Materia extends Model
      * @var array
      */
     protected $fillable = ['ID_PERIODO', 'ID_PROFESOR', 'NOMBRE_MATERIA', 'CODIGO_MATERIA'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

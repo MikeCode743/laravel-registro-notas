@@ -26,4 +26,11 @@ class GradoMateria extends Model
      * @var array
      */
     protected $fillable = ['ID_GRADO', 'ID_MATERIA'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

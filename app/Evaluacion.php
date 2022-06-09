@@ -26,4 +26,11 @@ class Evaluacion extends Model
      * @var array
      */
     protected $fillable = ['ID_MATERIA', 'ID_NOTA_EVALUACION', 'ID_ALUMNO', 'ID_EVALUACION', 'PORCENTAJE'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

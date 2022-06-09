@@ -26,4 +26,11 @@ class NotaPeriodo extends Model
      * @var array
      */
     protected $fillable = ['ID_NOTA_FINAL', 'ID_PERIODO', 'NOTA_PERIODO', 'NOTA_CONDUCTA'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

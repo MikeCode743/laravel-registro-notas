@@ -26,4 +26,11 @@ class Administrativo extends Model
      * @var array
      */
     protected $fillable = ['NOMBRE_ADMINIS', 'ID_USUARIO' ,'APELLIDO_ADMINIS', 'DUI_ADMINIS', 'CARGO', 'CELULAR_ADMINIS'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

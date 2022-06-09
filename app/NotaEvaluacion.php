@@ -26,4 +26,11 @@ class NotaEvaluacion extends Model
      * @var array
      */
     protected $fillable = ['ID_EVALUACION', 'ID_NOTA_PERIODO', 'NOTA_EVALUACION'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

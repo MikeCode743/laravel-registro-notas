@@ -11,7 +11,7 @@ class AnioEscolar extends Model
      *
      * @var string
      */
-    protected $table = 'ANO_ESCOLAR';
+    protected $table = 'ANIO_ESCOLAR';
 
     /**
      * The primary key associated with the table.
@@ -26,4 +26,18 @@ class AnioEscolar extends Model
      * @var array
      */
     protected $fillable = ['FECHA_INICIO', 'FECHA_FIN'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = true;
 }

@@ -14,7 +14,8 @@ class AnioEscolarController extends Controller
      */
     public function index()
     {
-        //
+        $escolar =  AnioEscolar::all();
+        return $escolar;
     }
 
     /**
@@ -35,7 +36,13 @@ class AnioEscolarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $nuevoAnioEscolar = new AnioEscolar;
+        $nuevoAnioEscolar->FECHA_INICIO =  $data['fecha_inicio'];
+        $nuevoAnioEscolar->FECHA_FIN =  $data['fecha_fin'];
+        $nuevoAnioEscolar->save();
+        return $nuevoAnioEscolar;
+
     }
 
     /**
@@ -44,9 +51,15 @@ class AnioEscolarController extends Controller
      * @param  \App\AnioEscolar  $anioEscolar
      * @return \Illuminate\Http\Response
      */
-    public function show(AnioEscolar $anioEscolar)
+    public function show($id)
     {
-        //
+        try {
+            $data = AnioEscolar::find($id);
+            return $data;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 
     /**
@@ -67,9 +80,21 @@ class AnioEscolarController extends Controller
      * @param  \App\AnioEscolar  $anioEscolar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AnioEscolar $anioEscolar)
+    public function update(Request $request, $id)
     {
-        //
+
+        try {
+            $data = $request->all();
+            $anioEscolar = AnioEscolar::find($id);
+            $anioEscolar->FECHA_INICIO = $data['fecha_inicio'];
+            $anioEscolar->FECHA_FIN = $data['fecha_fin'];
+            $anioEscolar->save();
+
+            return $anioEscolar;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 
     /**
@@ -78,8 +103,14 @@ class AnioEscolarController extends Controller
      * @param  \App\AnioEscolar  $anioEscolar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AnioEscolar $anioEscolar)
+    public function destroy($id)
     {
-        //
+        try {
+            AnioEscolar::destroy($id);
+            return 'AÑO ESCOLAR ELIMINADO';
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 }

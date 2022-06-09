@@ -26,4 +26,11 @@ class Grado extends Model
      * @var array
      */
     protected $fillable = ['ID_ANO', 'NOMBRE_GRADO', 'SECCION'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

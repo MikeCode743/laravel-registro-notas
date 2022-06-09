@@ -26,4 +26,11 @@ class NotaFinal extends Model
      * @var array
      */
     protected $fillable = ['ID_ANO', 'VALOR_'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

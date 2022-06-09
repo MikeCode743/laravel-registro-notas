@@ -26,4 +26,11 @@ class Profesor extends Model
      * @var array
      */
     protected $fillable = ['ID_USUARIO', 'NOMBRE_PROFESOR', 'APELLIDO_PROFESOR', 'DUI', 'DIRECCION_PROFESOR', 'CELULAR_PROFESOR', 'ESPECIALIZACION'];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

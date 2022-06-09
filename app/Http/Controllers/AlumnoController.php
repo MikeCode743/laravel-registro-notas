@@ -15,9 +15,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $escolar =  AnioEscolar::all();
-
-        return $escolar;
+        $alumno =  Alumno::all();
+        return $alumno;
     }
 
     /**
@@ -38,21 +37,19 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            //code..
-
-            $estadoItem = AnioEscolar::updateOrCreate(
-                ['id' => $request->id],
-                [
-                    'nombre' => $request->nombre,
-                    'descripcion' => $request->descripcion,
-                    'id_gd_acuerdo_catalogo' => $request->id_gd_acuerdo_catalogo,
-                ]
-            );
-            return back()->with("notificacion", ['icon' => 'success', 'title' => 'Done...', 'text' => 'Elemento Agregado']);
-        } catch (\Exception $e) {
-            return back()->with("notificacion", ['icon' => 'error', 'title' => 'No se pudo crear el recurso', 'text' => 'Error']);
-        }
+        $data = $request->all();
+        $nuevoAlumno = new Alumno;
+        $nuevoAlumno->ID_GRADO =  $data['id_grado'];
+        $nuevoAlumno->APELLIDO_ALUMNO =  $data['apellido'];
+        $nuevoAlumno->NOMBRE_TUTOR =  $data['nombre_tutor'];
+        $nuevoAlumno->DUI_TUTOR =  $data['dui_tutor'];
+        $nuevoAlumno->DIRECCION_VIVIENDA =  $data['direccion'];
+        $nuevoAlumno->CELULAR_TUTOR =  $data['celular'];
+        $nuevoAlumno->FECHA_NACIMIENTO_ALUMNO =  $data['fecha_nacimiento'];
+        $nuevoAlumno->NOMBRE_ALUMNO =  $data['nombre'];
+        $nuevoAlumno->EDAD_ALUMNO =  $data['edad'];
+        $nuevoAlumno->save();
+        return $nuevoAlumno;
     }
 
     /**
@@ -61,9 +58,15 @@ class AlumnoController extends Controller
      * @param  \App\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function show(Alumno $alumno)
+    public function show($id)
     {
-        //
+        try {
+            $data = Alumno::find($id);
+            return $data;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 
     /**
@@ -84,9 +87,27 @@ class AlumnoController extends Controller
      * @param  \App\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alumno $alumno)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $data = $request->all();
+            $alumno = Alumno::find($id);
+            $alumno->ID_GRADO =  $data['id_grado'];
+            $alumno->APELLIDO_ALUMNO =  $data['apellido'];
+            $alumno->NOMBRE_TUTOR =  $data['nombre_tutor'];
+            $alumno->DUI_TUTOR =  $data['dui_tutor'];
+            $alumno->DIRECCION_VIVIENDA =  $data['direccion'];
+            $alumno->CELULAR_TUTOR =  $data['celular'];
+            $alumno->FECHA_NACIMIENTO_ALUMNO =  $data['fecha_nacimiento'];
+            $alumno->NOMBRE_ALUMNO =  $data['nombre'];
+            $alumno->EDAD_ALUMNO =  $data['edad'];
+            $alumno->save();
+
+            return $alumno;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 
     /**
@@ -98,10 +119,11 @@ class AlumnoController extends Controller
     public function destroy($id)
     {
         try {
-            AnioEscolar::destroy($id);
-            return back()->with("notificacion", ['icon' => 'success', 'title' => 'Eliminado...', 'text' => 'Elemento elimiando']);
-        } catch (\Exception $e) {
-            return back()->with("notificacion", ['icon' => 'error', 'title' => 'No se pudo eliminar', 'text' => 'Error al eliminar']);
+            Alumno::destroy($id);
+            return 'ALUMNO ELIMINADO';
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
         }
     }
 }

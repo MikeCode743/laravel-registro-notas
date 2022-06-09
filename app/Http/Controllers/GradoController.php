@@ -14,7 +14,8 @@ class GradoController extends Controller
      */
     public function index()
     {
-        //
+        $grado =  Grado::all();
+        return $grado;
     }
 
     /**
@@ -35,7 +36,13 @@ class GradoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $nuevoGrado = new Grado;
+        $nuevoGrado->ID_ANO =  $data['id_ano'];
+        $nuevoGrado->NOMBRE_GRADO =  $data['nombre_grado'];
+        $nuevoGrado->SECCION =  $data['seccion'];
+        $nuevoGrado->save();
+        return $nuevoGrado;
     }
 
     /**
@@ -44,9 +51,15 @@ class GradoController extends Controller
      * @param  \App\Grado  $grado
      * @return \Illuminate\Http\Response
      */
-    public function show(Grado $grado)
+    public function show($id)
     {
-        //
+        try {
+            $data = Grado::find($id);
+            return $data;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 
     /**
@@ -67,9 +80,21 @@ class GradoController extends Controller
      * @param  \App\Grado  $grado
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Grado $grado)
+    public function update(Request $request, $id)
     {
-        //
+        try {
+            $data = $request->all();
+            $grado = Grado::find($id);
+            $grado->ID_ANO =  $data['id_ano'];
+            $grado->NOMBRE_GRADO =  $data['nombre_grado'];
+            $grado->SECCION =  $data['seccion'];
+            $grado->save();
+
+            return $grado;
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 
     /**
@@ -78,8 +103,14 @@ class GradoController extends Controller
      * @param  \App\Grado  $grado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Grado $grado)
+    public function destroy($id)
     {
-        //
+        try {
+            Grado::destroy($id);
+            return 'GRADO ELIMINADO';
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
     }
 }
