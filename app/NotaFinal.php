@@ -19,4 +19,11 @@ class NotaFinal extends Model
      * @var string
      */
     protected $primaryKey = 'ID_NOTA_FINAL';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['ID_ANO', 'VALOR_'];
 }

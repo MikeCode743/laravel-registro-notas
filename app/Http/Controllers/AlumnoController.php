@@ -38,7 +38,21 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            //code..
+
+            $estadoItem = AnioEscolar::updateOrCreate(
+                ['id' => $request->id],
+                [
+                    'nombre' => $request->nombre,
+                    'descripcion' => $request->descripcion,
+                    'id_gd_acuerdo_catalogo' => $request->id_gd_acuerdo_catalogo,
+                ]
+            );
+            return back()->with("notificacion", ['icon' => 'success', 'title' => 'Done...', 'text' => 'Elemento Agregado']);
+        } catch (\Exception $e) {
+            return back()->with("notificacion", ['icon' => 'error', 'title' => 'No se pudo crear el recurso', 'text' => 'Error']);
+        }
     }
 
     /**
@@ -81,8 +95,13 @@ class AlumnoController extends Controller
      * @param  \App\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alumno $alumno)
+    public function destroy($id)
     {
-        //
+        try {
+            AnioEscolar::destroy($id);
+            return back()->with("notificacion", ['icon' => 'success', 'title' => 'Eliminado...', 'text' => 'Elemento elimiando']);
+        } catch (\Exception $e) {
+            return back()->with("notificacion", ['icon' => 'error', 'title' => 'No se pudo eliminar', 'text' => 'Error al eliminar']);
+        }
     }
 }

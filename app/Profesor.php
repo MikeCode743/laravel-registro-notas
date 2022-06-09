@@ -19,4 +19,11 @@ class Profesor extends Model
      * @var string
      */
     protected $primaryKey = 'ID_PROFESOR';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['ID_USUARIO', 'NOMBRE_PROFESOR', 'APELLIDO_PROFESOR', 'DUI', 'DIRECCION_PROFESOR', 'CELULAR_PROFESOR', 'ESPECIALIZACION'];
 }

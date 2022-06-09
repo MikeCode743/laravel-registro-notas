@@ -19,4 +19,11 @@ class Grado extends Model
      * @var string
      */
     protected $primaryKey = 'ID_GRADO';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['ID_ANO', 'NOMBRE_GRADO', 'SECCION'];
 }

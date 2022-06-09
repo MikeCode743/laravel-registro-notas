@@ -19,4 +19,11 @@ class Evaluacion extends Model
      * @var string
      */
     protected $primaryKey = 'ID_EVALUACION';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['ID_MATERIA', 'ID_NOTA_EVALUACION', 'ID_ALUMNO', 'ID_EVALUACION', 'PORCENTAJE'];
 }

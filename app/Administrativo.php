@@ -19,4 +19,11 @@ class Administrativo extends Model
      * @var string
      */
     protected $primaryKey = 'ID_ADMINISTRATIVO';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['NOMBRE_ADMINIS', 'ID_USUARIO' ,'APELLIDO_ADMINIS', 'DUI_ADMINIS', 'CARGO', 'CELULAR_ADMINIS'];
 }

@@ -19,4 +19,11 @@ class AnioEscolar extends Model
      * @var string
      */
     protected $primaryKey = 'ID_ANO';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['FECHA_INICIO', 'FECHA_FIN'];
 }

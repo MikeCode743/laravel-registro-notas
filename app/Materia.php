@@ -19,4 +19,11 @@ class Materia extends Model
      * @var string
      */
     protected $primaryKey = 'ID_MATERIA';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['ID_PERIODO', 'ID_PROFESOR', 'NOMBRE_MATERIA', 'CODIGO_MATERIA'];
 }

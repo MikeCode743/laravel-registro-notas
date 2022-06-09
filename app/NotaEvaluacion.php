@@ -19,4 +19,11 @@ class NotaEvaluacion extends Model
      * @var string
      */
     protected $primaryKey = 'ID_NOTA_EVALUACION';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['ID_EVALUACION', 'ID_NOTA_PERIODO', 'NOTA_EVALUACION'];
 }
