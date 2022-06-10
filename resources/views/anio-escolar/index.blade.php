@@ -31,10 +31,10 @@
                                     <td>{{ $g->NOMBRE_GRADO }}</td>
                                     <td>{{ $g->SECCION }}</td>
                                     <td>
-                                        <a type="button" href="{{route('grado.edit', $g->ID_GRADO)}}" class="mr-2 btn btn-primary" data-bs-toggle="tooltip"
+                                        <button type="button" class="mr-2 btn btn-primary" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Tooltip on top">
                                             <i class="fa-solid fa-pen-to-square"></i>
-                                        </a>
+                                        </button>
                                         @include('grados.show-modal')
                                         @include('grados.delete-modal')
                                     </td>

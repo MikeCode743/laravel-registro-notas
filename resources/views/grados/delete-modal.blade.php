@@ -1,8 +1,10 @@
 <!-- Button trigger modal -->
 
 <span data-bs-toggle="modal" data-bs-target="#deleteModal">
-    <a type="button" class="btn btn-danger mr-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Tooltip">
-            <i class="fa-solid fa-trash"></i>
+    <a type="button" class="btn btn-danger mr-2 open-deleteModal" data-id="{{ $g->ID_GRADO }}" data-bs-toggle="tooltip"
+        data-bs-placement="top" title="Eliminar">
+        <i class="fa-solid fa-trash"></i>
+        {{ $g->ID_GRADO }}
     </a>
 </span>
 
@@ -17,12 +19,30 @@
                 </a>
             </div>
             <div class="modal-body">
-                ...
+                ¿Seguro que desea eliminar el Grado?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <form action="" method="post">
+                    @method('delete')
+                </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).on("click", ".open-deleteModal", function() {
+        let gradoID = $(this).data('id');
+        $(".modal-body #gradoID").val(gradoID);
+    });
+
+    $('#deleteModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var gradoID = button.data('gradoID');
+
+        var modal = $(this)
+        modal.find('#deleteForm').attr("action", "{{ url('/grados') }}" + "/" + gradoID)
+        modal.find('#deleteForm input').val(gradoID)
+    })
+</script>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AnioEscolar;
 use App\Grado;
+use Exception;
 use Illuminate\Http\Request;
 
 class GradoController extends Controller
@@ -25,7 +27,9 @@ class GradoController extends Controller
      */
     public function create()
     {
-        //
+        $anioEscolar =  AnioEscolar::all();
+
+        return view('grados.create', ['lista_anio_escolar' => $anioEscolar]);
     }
 
     /**
@@ -36,13 +40,21 @@ class GradoController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $nuevoGrado = new Grado;
-        $nuevoGrado->ID_ANO =  $data['id_ano'];
-        $nuevoGrado->NOMBRE_GRADO =  $data['nombre_grado'];
-        $nuevoGrado->SECCION =  $data['seccion'];
-        $nuevoGrado->save();
-        return $nuevoGrado;
+
+        try {
+            $data = $request->all();
+            $nuevoGrado = new Grado;
+            $nuevoGrado->ID_ANO =  $data['id_ano'];
+            $nuevoGrado->NOMBRE_GRADO =  $data['nombre_grado'];
+            $nuevoGrado->SECCION =  $data['seccion'];
+            $nuevoGrado->save();
+            return redirect()->back()
+                ->with('success', 'Agregado Con exito!');
+        } catch (Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
+            //throw $th;
+        }
     }
 
     /**
@@ -68,9 +80,14 @@ class GradoController extends Controller
      * @param  \App\Grado  $grado
      * @return \Illuminate\Http\Response
      */
-    public function edit(Grado $grado)
+    public function edit($id)
     {
-        //
+        //        
+        $data = Grado::find($id);
+        $anioEscolar =  AnioEscolar::all();
+
+
+        return view('grados.edit', ['grado' => $data, 'lista_anio_escolar' => $anioEscolar]);
     }
 
     /**
@@ -90,10 +107,12 @@ class GradoController extends Controller
             $grado->SECCION =  $data['seccion'];
             $grado->save();
 
-            return $grado;
+            return redirect()->back()
+                ->with('success', 'Actualizado Con exito!');
         } catch (\Throwable $th) {
             //throw $th;
-            return $th;
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
         }
     }
 
@@ -107,10 +126,12 @@ class GradoController extends Controller
     {
         try {
             Grado::destroy($id);
-            return 'GRADO ELIMINADO';
+            return redirect()->back()
+                ->with('success', 'Eliminado Con exito!');
         } catch (\Throwable $th) {
             //throw $th;
-            return $th;
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
         }
     }
 }

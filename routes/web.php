@@ -20,17 +20,20 @@ Route::get('/', function () {
 
 //ANIO_ESCOLAR
 Route::get('/anio-escolar', 'AnioEscolarController@index');
+Route::get('/anio-escolar/create', 'AnioEscolarController@create')->name('anio-escolar.create');
 Route::post('/anio-escolar', 'AnioEscolarController@store');
 Route::put('/anio-escolar/{id}', 'AnioEscolarController@update');
 Route::get('/anio-escolar/{id}', 'AnioEscolarController@show');
 Route::delete('/anio-escolar/{id}', 'AnioEscolarController@destroy');
 
 //GRADO
-Route::get('/grados', 'GradoController@index');
+Route::get('/grados', 'GradoController@index')->name('grado.index');
+Route::get('/grados/create', 'GradoController@create')->name('grado.create');
+Route::get('/grados/edit/{id}', 'GradoController@edit')->name('grado.edit');
 Route::post('/grados', 'GradoController@store');
-Route::put('/grados/{id}', 'GradoController@update');
+Route::put('/grados/{id}', 'GradoController@update')->name('grado.update');
 Route::get('/grados/{id}', 'GradoController@show');
-Route::delete('/grados/{id}', 'GradoController@destroy');
+Route::delete('/grados/{id}', 'GradoController@destroy')->name('grado.delete');;
 
 //ALUMNOS
 Route::get('/alumnos', 'AlumnoController@index');
