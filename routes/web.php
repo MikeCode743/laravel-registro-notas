@@ -33,7 +33,7 @@ Route::get('/grados/edit/{id}', 'GradoController@edit')->name('grado.edit');
 Route::post('/grados', 'GradoController@store');
 Route::put('/grados/{id}', 'GradoController@update')->name('grado.update');
 Route::get('/grados/{id}', 'GradoController@show');
-Route::delete('/grados/{id}', 'GradoController@destroy')->name('grado.delete');;
+Route::delete('/grados/', 'GradoController@destroy')->name('grado.delete');;
 
 //ALUMNOS
 Route::get('/alumnos', 'AlumnoController@index');

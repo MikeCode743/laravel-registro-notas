@@ -122,8 +122,9 @@ class GradoController extends Controller
      * @param  \App\Grado  $grado
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->id_grado;
         try {
             Grado::destroy($id);
             return redirect()->back()
