@@ -15,7 +15,7 @@ class AnioEscolarController extends Controller
     public function index()
     {
         $escolar =  AnioEscolar::all();
-        return $escolar;
+        return view('anio-escolar.index', ['escolar' => $escolar]);
     }
 
     /**
@@ -25,7 +25,7 @@ class AnioEscolarController extends Controller
      */
     public function create()
     {
-        //
+        return view('anio-escolar.create');
     }
 
     /**
@@ -36,12 +36,20 @@ class AnioEscolarController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $nuevoAnioEscolar = new AnioEscolar;
-        $nuevoAnioEscolar->FECHA_INICIO =  $data['fecha_inicio'];
-        $nuevoAnioEscolar->FECHA_FIN =  $data['fecha_fin'];
-        $nuevoAnioEscolar->save();
-        return $nuevoAnioEscolar;
+        try {
+            $data = $request->all();
+            $nuevoAnioEscolar = new AnioEscolar;
+            $nuevoAnioEscolar->FECHA_INICIO =  $data['fecha_inicio'];
+            $nuevoAnioEscolar->FECHA_FIN =  $data['fecha_fin'];
+            $nuevoAnioEscolar->save();
+            return redirect()->back()
+                ->with('success', 'Agregado Con exito!');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
+        }
+
 
     }
 
@@ -68,9 +76,11 @@ class AnioEscolarController extends Controller
      * @param  \App\AnioEscolar  $anioEscolar
      * @return \Illuminate\Http\Response
      */
-    public function edit(AnioEscolar $anioEscolar)
+    public function edit($id)
     {
-        //
+        $anioEscolar =  AnioEscolar::find($id);
+        return view('anio-escolar.edit', ['anioEscolar' => $anioEscolar]);
+
     }
 
     /**
@@ -82,7 +92,6 @@ class AnioEscolarController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         try {
             $data = $request->all();
             $anioEscolar = AnioEscolar::find($id);
@@ -90,10 +99,12 @@ class AnioEscolarController extends Controller
             $anioEscolar->FECHA_FIN = $data['fecha_fin'];
             $anioEscolar->save();
 
-            return $anioEscolar;
+            return redirect()->back()
+                ->with('success', 'Actualizado Con exito!');
         } catch (\Throwable $th) {
             //throw $th;
-            return $th;
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
         }
     }
 
@@ -103,14 +114,17 @@ class AnioEscolarController extends Controller
      * @param  \App\AnioEscolar  $anioEscolar
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->escolar;
         try {
             AnioEscolar::destroy($id);
-            return 'AÑO ESCOLAR ELIMINADO';
+            return redirect()->back()
+                ->with('success', 'Eliminado Con exito!');
         } catch (\Throwable $th) {
             //throw $th;
-            return $th;
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
         }
     }
 }

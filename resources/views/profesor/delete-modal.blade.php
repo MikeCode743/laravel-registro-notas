@@ -1,7 +1,7 @@
 <!-- Button trigger modal -->
 
 <span >
-    <a type="button" class="btn btn-danger mr-2 open-deleteModal" data-escolar="{{ $e->ID_ANO }}" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-toggle="tooltip"
+    <a type="button" class="btn btn-danger mr-2 open-deleteModal" data-grado="{{ $g->ID_GRADO }}" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-toggle="tooltip"
         data-bs-placement="top" title="Eliminar">
         <i class="fa-solid fa-trash"></i>
     </a>
@@ -13,17 +13,17 @@
         <div class="modal-content">
             <form action="" method="post">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Periodo Escolar</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Grado</h5>
                     <a type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fa-solid fa-circle-xmark"></i>
                     </a>
                 </div>
                 <div class="modal-body">
-                    ¿Seguro que desea eliminar el Periodo Escolar?
+                    ¿Seguro que desea eliminar el Grado?
 
                     @method('delete')
                     @csrf
-                    <input type="hidden" name="escolar" id="escolar" value="">
+                    <input type="hidden" name="id_grado" id="id_grado" value="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -38,8 +38,8 @@
 <script>
     $('#deleteModal').on('show.bs.modal', function(event) {
         let button = $(event.relatedTarget)
-        let id_escolar = button.data('escolar')
+        let id_grado = button.data('grado')
         let modal = $(this)
-        modal.find('.modal-body #escolar').val(id_escolar);
+        modal.find('.modal-body #id_grado').val(id_grado);
     })
 </script>

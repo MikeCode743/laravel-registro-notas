@@ -21,10 +21,11 @@ Route::get('/', function () {
 //ANIO_ESCOLAR
 Route::get('/anio-escolar', 'AnioEscolarController@index');
 Route::get('/anio-escolar/create', 'AnioEscolarController@create')->name('anio-escolar.create');
+Route::get('/anio-escolar/edit/{id}', 'AnioEscolarController@edit')->name('anio-escolar.edit');
 Route::post('/anio-escolar', 'AnioEscolarController@store');
-Route::put('/anio-escolar/{id}', 'AnioEscolarController@update');
+Route::put('/anio-escolar/{id}', 'AnioEscolarController@update')->name('anio-escolar.update');
 Route::get('/anio-escolar/{id}', 'AnioEscolarController@show');
-Route::delete('/anio-escolar/{id}', 'AnioEscolarController@destroy');
+Route::delete('/anio-escolar/', 'AnioEscolarController@destroy');
 
 //GRADO
 Route::get('/grados', 'GradoController@index')->name('grado.index');

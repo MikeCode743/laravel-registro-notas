@@ -18,20 +18,21 @@
                 </div>
 
                 <div class="my-4">
-                    <form method="POST" action="/anio-escolar">
+                    <form method="POST" action="{{route('anio-escolar.update',$anioEscolar->ID_ANO) }}">
+                        @method('PUT')
                         @csrf
                         <div class="form-group">
                             <label for="fecha_inicio">Fecha de inicio de periodo escolar</label>
-                            <input type="text" class="form-control datepickers" id="fecha_inicio" name="fecha_inicio"
-                                aria-describedby="fechaInicioHelp" placeholder="dd/mm/yyyy">
-                            <small id="fechaInicioHelp" class="form-text text-muted">Fecha de inicio.</small>
+                            <input type="text" class="form-control datepickers" id="fecha_inicio"  name="fecha_inicio"
+                                aria-describedby="fechaInicioHelp" placeholder="dd/mm/yyyy" value="{{$anioEscolar->FECHA_INICIO}}">
+                            <small id="emailHelp" class="form-text text-muted">Fecha de inicio.</small>
                         </div>
 
                         <div class="form-group">
                             <label for="fecha_fin">Fecha de finalizacion de periodo escolar</label>
                             <input type="text" class="form-control datepickers" id="fecha_fin" name="fecha_fin"
-                                aria-describedby="fechaFinHelp" placeholder="dd/mm/yyyy">
-                            <small id="fechaFinHelp" class="form-text text-muted">Fecha de finalizacion.</small>
+                                aria-describedby="fechaFinHelp" placeholder="dd/mm/yyyy" value="{{$anioEscolar->FECHA_FIN}}">
+                            <small id="emailHelp" class="form-text text-muted">Fecha de finalizacion.</small>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Crear Nuevo Año Escolar</button>

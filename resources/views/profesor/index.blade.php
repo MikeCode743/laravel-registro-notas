@@ -12,31 +12,31 @@
                     </div>
                 </div>
                 <div class="row justify-content-center my-3">
-                    <a type="button" href="{{route('anio-escolar.create')}}" class="btn btn-primary">Agregar Grado</a>
+                    <a type="button" href="{{route('grado.create')}}" class="btn btn-primary">Agregar Grado</a>
                 </div>
                 <div class="mt-10">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Fecha inicio</th>
-                                <th scope="col">Fecha finalizacion</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Seccion</th>
                                 <th scope="col">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($escolar as $e)
+                            @foreach ($grados as $g)
                                 <tr>
-                                    <th scope="row">{{ $e->ID_ANO }}</th>
-                                    <th scope="row">{{ $e->FECHA_INICIO }}</th>
-                                    <th scope="row">{{ $e->FECHA_FIN }}</th>
-
+                                    <th scope="row">{{ $g->ID_GRADO }}</th>
+                                    <td>{{ $g->NOMBRE_GRADO }}</td>
+                                    <td>{{ $g->SECCION }}</td>
                                     <td>
-                                        <a type="button" href="{{route('anio-escolar.edit', $e->ID_ANO)}}" class="mr-2 btn btn-primary" data-bs-toggle="tooltip"
+                                        <a type="button" href="{{route('grado.edit', $g->ID_GRADO)}}" class="mr-2 btn btn-primary" data-bs-toggle="tooltip"
                                             data-bs-placement="top" title="Tooltip on top">
                                             <i class="fa-solid fa-pen-to-square"></i>
                                         </a>
-                                        @include('anio-escolar.delete-modal')
+                                        @include('grados.show-modal')
+                                        @include('grados.delete-modal')
                                     </td>
                                 </tr>
                             @endforeach
