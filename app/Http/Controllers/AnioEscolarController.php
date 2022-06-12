@@ -124,7 +124,7 @@ class AnioEscolarController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             return redirect()->back()
-                ->with('error', 'Upps, Ocurrio un error!');
+                ->with('error', 'No se puede borrar el registro, Esta siendo ocupado en algun registro!');
         }
     }
 }

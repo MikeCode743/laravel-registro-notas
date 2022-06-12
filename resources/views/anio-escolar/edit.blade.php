@@ -36,6 +36,8 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Crear Nuevo Año Escolar</button>
+                        <a type="button" href="{{route('anio-escolar.index')}}" class="btn btn-secondary mr-4">Cancelar</a>
+
                     </form>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Alumno;
 use App\AnioEscolar;
+use App\Grado;
 use Illuminate\Http\Request;
 
 class AlumnoController extends Controller
@@ -15,8 +16,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        $alumno =  Alumno::all();
-        return $alumno;
+        $alumnos =  Alumno::all();
+        return view('alumno.index', compact('alumnos'));
     }
 
     /**
@@ -26,7 +27,8 @@ class AlumnoController extends Controller
      */
     public function create()
     {
-        //
+        $grados =  Grado::all();
+        return view('alumno.create', compact('grados'));
     }
 
     /**
@@ -37,19 +39,27 @@ class AlumnoController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $nuevoAlumno = new Alumno;
-        $nuevoAlumno->ID_GRADO =  $data['id_grado'];
-        $nuevoAlumno->APELLIDO_ALUMNO =  $data['apellido'];
-        $nuevoAlumno->NOMBRE_TUTOR =  $data['nombre_tutor'];
-        $nuevoAlumno->DUI_TUTOR =  $data['dui_tutor'];
-        $nuevoAlumno->DIRECCION_VIVIENDA =  $data['direccion'];
-        $nuevoAlumno->CELULAR_TUTOR =  $data['celular'];
-        $nuevoAlumno->FECHA_NACIMIENTO_ALUMNO =  $data['fecha_nacimiento'];
-        $nuevoAlumno->NOMBRE_ALUMNO =  $data['nombre'];
-        $nuevoAlumno->EDAD_ALUMNO =  $data['edad'];
-        $nuevoAlumno->save();
-        return $nuevoAlumno;
+        try {
+            $data = $request->all();
+            $nuevoAlumno = new Alumno;
+            $nuevoAlumno->ID_GRADO =  $data['id_grado'];
+            $nuevoAlumno->APELLIDO_ALUMNO =  $data['apellido'];
+            $nuevoAlumno->NOMBRE_TUTOR =  $data['nombre_tutor'];
+            $nuevoAlumno->DUI_TUTOR =  $data['dui_tutor'];
+            $nuevoAlumno->DIRECCION_VIVIENDA =  $data['direccion'];
+            $nuevoAlumno->CELULAR_TUTOR =  $data['telefono'];
+            $nuevoAlumno->FECHA_NACIMIENTO_ALUMNO =  $data['fecha_nacimiento'];
+            $nuevoAlumno->NOMBRE_ALUMNO =  $data['nombre'];
+            $nuevoAlumno->EDAD_ALUMNO =  $data['edad'];
+            $nuevoAlumno->save();
+            return redirect()->back()
+            ->with('success', 'Agregado Con exito!');
+        } catch (\Exception $th) {
+            //throw $th;
+            dd($th);
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
+        }
     }
 
     /**
@@ -65,7 +75,8 @@ class AlumnoController extends Controller
             return $data;
         } catch (\Throwable $th) {
             //throw $th;
-            return $th;
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
         }
     }
 
@@ -75,9 +86,12 @@ class AlumnoController extends Controller
      * @param  \App\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function edit(Alumno $alumno)
+    public function edit($id)
     {
-        //
+        $alumno = Alumno::find($id);
+        $grados =  Grado::all();
+
+        return view('alumno.edit', compact('alumno', 'grados'));
     }
 
     /**
@@ -97,16 +111,20 @@ class AlumnoController extends Controller
             $alumno->NOMBRE_TUTOR =  $data['nombre_tutor'];
             $alumno->DUI_TUTOR =  $data['dui_tutor'];
             $alumno->DIRECCION_VIVIENDA =  $data['direccion'];
-            $alumno->CELULAR_TUTOR =  $data['celular'];
+            $alumno->CELULAR_TUTOR =  $data['telefono'];
             $alumno->FECHA_NACIMIENTO_ALUMNO =  $data['fecha_nacimiento'];
             $alumno->NOMBRE_ALUMNO =  $data['nombre'];
             $alumno->EDAD_ALUMNO =  $data['edad'];
             $alumno->save();
 
-            return $alumno;
-        } catch (\Throwable $th) {
+            return redirect()->back()
+                ->with('success', 'Actualizado Con exito!');
+        } catch (\Exception $th) {
             //throw $th;
-            return $th;
+
+            dd($th);
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
         }
     }
 
@@ -116,14 +134,17 @@ class AlumnoController extends Controller
      * @param  \App\Alumno  $alumno
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id = $request->id_alumno;
         try {
             Alumno::destroy($id);
-            return 'ALUMNO ELIMINADO';
+            return redirect()->back()
+                ->with('success', 'Agregado Con exito!');
         } catch (\Throwable $th) {
             //throw $th;
-            return $th;
+            return redirect()->back()
+                ->with('error', 'Upps, Ocurrio un error!');
         }
     }
 }

@@ -24,7 +24,7 @@
                         <select id="id_ano" name="id_ano" class="form-control" required>
                             <option selected>Seleccione...</option>
                             @foreach ($lista_anio_escolar as $item)
-                                <option value="{{ $item->ID_ANO }}" selected>Comienza:{{ $item->FECHA_INICIO }} -
+                                <option value="{{ $item->ID_ANO }}">Comienza:{{ $item->FECHA_INICIO }} -
                                     Termina:
                                     {{ $item->FECHA_FIN }} </option>
                             @endforeach
@@ -44,7 +44,7 @@
 
                         <div class=" row justify-content-center">
                             <button type="submit" class="btn btn-primary">Crear Grado</button>
-                            <a type="button" href="{{route('grado.index')}}" class="btn btn-secondary mr-4">Cancelar</a>
+                            <a type="button" href="{{route('grado.index')}}" class="btn btn-secondary ml-4">Cancelar</a>
                         </div>
                     </form>
                 </div>

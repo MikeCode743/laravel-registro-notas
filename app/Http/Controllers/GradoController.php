@@ -132,7 +132,7 @@ class GradoController extends Controller
         } catch (\Throwable $th) {
             //throw $th;
             return redirect()->back()
-                ->with('error', 'Upps, Ocurrio un error!');
+                ->with('error', 'No se puede borrar el grado, esta siendo utilizado en algun registro!');
         }
     }
 }
